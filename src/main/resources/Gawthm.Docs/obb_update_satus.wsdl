@@ -1,0 +1,87 @@
+<?xml version=3D"1.0" encoding=3D"ISO-8859-1"?>=0A=
+<definitions =
+xmlns:SOAP-ENV=3D"http://schemas.xmlsoap.org/soap/envelope/" =
+xmlns:xsd=3D"http://www.w3.org/2001/XMLSchema" =
+xmlns:xsi=3D"http://www.w3.org/2001/XMLSchema-instance" =
+xmlns:SOAP-ENC=3D"http://schemas.xmlsoap.org/soap/encoding/" =
+xmlns:tns=3D"urn:order" =
+xmlns:soap=3D"http://schemas.xmlsoap.org/wsdl/soap/" =
+xmlns:wsdl=3D"http://schemas.xmlsoap.org/wsdl/" =
+xmlns=3D"http://schemas.xmlsoap.org/wsdl/" targetNamespace=3D"urn:order">=0A=
+<types>=0A=
+<xsd:schema targetNamespace=3D"urn:order"=0A=
+>=0A=
+ <xsd:import namespace=3D"http://schemas.xmlsoap.org/soap/encoding/" />=0A=
+ <xsd:import namespace=3D"http://schemas.xmlsoap.org/wsdl/" />=0A=
+ <xsd:complexType name=3D"usercredentials">=0A=
+  <xsd:all>=0A=
+   <xsd:element name=3D"username" type=3D"xsd:string"/>=0A=
+   <xsd:element name=3D"password" type=3D"xsd:string"/>=0A=
+   <xsd:element name=3D"client_id" type=3D"xsd:string"/>=0A=
+   <xsd:element name=3D"client_secret" type=3D"xsd:string"/>=0A=
+  </xsd:all>=0A=
+ </xsd:complexType>=0A=
+ <xsd:complexType name=3D"data">=0A=
+  <xsd:all>=0A=
+   <xsd:element name=3D"obb_ref_num" type=3D"xsd:string"/>=0A=
+   <xsd:element name=3D"order_status" type=3D"xsd:string"/>=0A=
+   <xsd:element name=3D"installation_date" type=3D"xsd:string"/>=0A=
+   <xsd:element name=3D"power_level_at_cap" type=3D"xsd:string"/>=0A=
+   <xsd:element name=3D"power_level_at_fdh" type=3D"xsd:string"/>=0A=
+   <xsd:element name=3D"ont_make" type=3D"xsd:string"/>=0A=
+   <xsd:element name=3D"ont_serialno" type=3D"xsd:string"/>=0A=
+   <xsd:element name=3D"handset_make" type=3D"xsd:string"/>=0A=
+   <xsd:element name=3D"handset_serialno" type=3D"xsd:string"/>=0A=
+   <xsd:element name=3D"fdn" type=3D"xsd:string"/>=0A=
+   <xsd:element name=3D"problem_category" type=3D"xsd:string"/>=0A=
+   <xsd:element name=3D"problem_description" type=3D"xsd:string"/>=0A=
+   <xsd:element name=3D"consent_signature_file_name" =
+type=3D"xsd:string"/>=0A=
+   <xsd:element name=3D"consent_signature_file" type=3D"xsd:string" =
+file=3D"http://www.w3.org/2001/XMLSchema:base64Binary"/>=0A=
+   <xsd:element name=3D"evidence_photo_file_name" type=3D"xsd:string"/>=0A=
+   <xsd:element name=3D"evidence_photo_file" type=3D"xsd:string" =
+file=3D"http://www.w3.org/2001/XMLSchema:base64Binary"/>=0A=
+   <xsd:element name=3D"qhse_form_file_name" type=3D"xsd:string"/>=0A=
+   <xsd:element name=3D"qhse_form_file" type=3D"xsd:string" =
+file=3D"http://www.w3.org/2001/XMLSchema:base64Binary"/>=0A=
+   <xsd:element name=3D"completion_sheet_file_name" type=3D"xsd:string"/>=0A=
+   <xsd:element name=3D"completion_sheet_file" type=3D"xsd:string" =
+file=3D"http://www.w3.org/2001/XMLSchema:base64Binary"/>=0A=
+  </xsd:all>=0A=
+ </xsd:complexType>=0A=
+</xsd:schema>=0A=
+</types>=0A=
+<message name=3D"updateOrderStatusRequest">=0A=
+  <part name=3D"usercredentials" type=3D"tns:usercredentials" />=0A=
+  <part name=3D"data" type=3D"tns:data" /></message>=0A=
+<message name=3D"updateOrderStatusResponse">=0A=
+  <part name=3D"return" type=3D"xsd:string" /></message>=0A=
+<portType name=3D"OBB Update Order StatusPortType">=0A=
+  <operation name=3D"updateOrderStatus">=0A=
+    <documentation>Update Order Status in CRM.</documentation>=0A=
+    <input message=3D"tns:updateOrderStatusRequest"/>=0A=
+    <output message=3D"tns:updateOrderStatusResponse"/>=0A=
+  </operation>=0A=
+</portType>=0A=
+<binding name=3D"OBB Update Order StatusBinding" type=3D"tns:OBB Update =
+Order StatusPortType">=0A=
+  <soap:binding style=3D"rpc" =
+transport=3D"http://schemas.xmlsoap.org/soap/http"/>=0A=
+  <operation name=3D"updateOrderStatus">=0A=
+    <soap:operation soapAction=3D"urn:order#updateOrderStatus" =
+style=3D"rpc"/>=0A=
+    <input><soap:body use=3D"encoded" namespace=3D"urn:order" =
+encodingStyle=3D"http://schemas.xmlsoap.org/soap/encoding/"/></input>=0A=
+    <output><soap:body use=3D"encoded" namespace=3D"urn:order" =
+encodingStyle=3D"http://schemas.xmlsoap.org/soap/encoding/"/></output>=0A=
+  </operation>=0A=
+</binding>=0A=
+<service name=3D"OBB Update Order Status">=0A=
+  <port name=3D"OBB Update Order StatusPort" binding=3D"tns:OBB Update =
+Order StatusBinding">=0A=
+    <soap:address =
+location=3D"http://localhost:8080/obb_ffa/obb_update_satus.php"/>=0A=
+  </port>=0A=
+</service>=0A=
+</definitions>
