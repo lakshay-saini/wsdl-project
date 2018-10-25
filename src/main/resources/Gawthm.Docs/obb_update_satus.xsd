@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<definitions
+        xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+        xmlns:tns="urn:order"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        xmlns="http://schemas.xmlsoap.org/wsdl/"
+        targetNamespace="urn:order">
+    <types>
+        <xsd:schema targetNamespace="urn:order">
+            <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+            <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/"/>
+            <xsd:complexType name="usercredentials">
+                <xsd:all>
+                    <xsd:element name="username" type="xsd:string"/>
+                    <xsd:element name="password" type="xsd:string"/>
+                    <xsd:element name="client_id" type="xsd:string"/>
+                    <xsd:element name="client_secret" type="xsd:string"/>
+                </xsd:all>
+            </xsd:complexType>
+            <xsd:complexType name="data">
+                <xsd:all>
+                    <xsd:element name="obb_ref_num" type="xsd:string"/>
+                    <xsd:element name="order_status" type="xsd:string"/>
+                    <xsd:element name="installation_date" type="xsd:string"/>
+                    <xsd:element name="power_level_at_cap" type="xsd:string"/>
+                    <xsd:element name="power_level_at_fdh" type="xsd:string"/>
+                    <xsd:element name="ont_make" type="xsd:string"/>
+                    <xsd:element name="ont_serialno" type="xsd:string"/>
+                    <xsd:element name="handset_make" type="xsd:string"/>
+                    <xsd:element name="handset_serialno" type="xsd:string"/>
+                    <xsd:element name="fdn" type="xsd:string"/>
+                    <xsd:element name="problem_category" type="xsd:string"/>
+                    <xsd:element name="problem_description" type="xsd:string"/>
+                    <xsd:element name="consent_signature_file_name" type="xsd:string"/>
+                    <xsd:element name="consent_signature_file" type="xsd:base64Binary"/>
+                    <xsd:element name="evidence_photo_file_name" type="xsd:string"/>
+                    <xsd:element name="evidence_photo_file" type="xsd:base64Binary"/>
+                    <xsd:element name="qhse_form_file_name" type="xsd:string"/>
+                    <xsd:element name="qhse_form_file" type="xsd:base64Binary"/>
+                    <xsd:element name="completion_sheet_file_name" type="xsd:string"/>
+                    <xsd:element name="completion_sheet_file" type="xsd:base64Binary"/>
+                </xsd:all>
+            </xsd:complexType>
+        </xsd:schema>
+    </types>
+    <message name="updateOrderStatusRequest">
+        <part name="usercredentials" type="tns:usercredentials"/>
+        <part name="data" type="tns:data"/>
+    </message>
+    <message name="updateOrderStatusResponse">
+        <part name="return" type="xsd:string"/>
+    </message>
+    <portType name="OBBUpdateOrderStatusPortType">
+        <operation name="updateOrderStatus">
+            <documentation>Update Order Status in CRM.</documentation>
+            <input message="tns:updateOrderStatusRequest"/>
+            <output message="tns:updateOrderStatusResponse"/>
+        </operation>
+    </portType>
+    <binding name="OBBUpdateOrderStatusBinding" type="tns:OBBUpdateOrderStatusPortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="updateOrderStatus">
+            <soap:operation soapAction="urn:order#updateOrderStatus" style="rpc"/>
+            <input>
+                <soap:body use="encoded" namespace="urn:order"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body use="encoded" namespace="urn:order"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="OBBUpdateOrderStatus">
+        <port name="OBBUpdateOrderStatusPort" binding="tns:OBBUpdateOrderStatusBinding">
+            <soap:address
+                    location="http://localhost:8080/obb_ffa/obb_update_satus.php"/>
+        </port>
+    </service>
+</definitions>
